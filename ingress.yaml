@@ -9,4 +9,4 @@ spec:
       paths:
       - backend:
           serviceName: demo
-          servicePort: 80
+          servicePort: 443

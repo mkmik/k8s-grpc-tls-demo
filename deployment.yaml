@@ -19,3 +19,4 @@ spec:
         image: bitnami/nginx:1.16.1-debian-9-r84
         ports:
         - containerPort: 8080
+        - containerPort: 8443
