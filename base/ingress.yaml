@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: demo
+  annotations:
+    certmanager.k8s.io/acme-challenge-type: dns01
+    certmanager.k8s.io/acme-dns01-provider: default
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod-dns
+    nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+spec:
+  rules:
+  - host: demo-tls.k.dev.bitnami.net
+    http:
+      paths:
+      - backend:
+          serviceName: demo-clusterip
+          servicePort: 50052
+  tls:
+  - hosts:
+    - demo-tls.k.dev.bitnami.net
+    secretName: demo-cert

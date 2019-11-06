@@ -4,6 +4,9 @@ metadata:
   name: demo
   labels:
     app: demo
+  annotations:
+    description: |
+      This is a gRPC server demo implementing the helloworld.proto
 spec:
   replicas: 3
   selector:
@@ -15,8 +18,7 @@ spec:
         app: demo
     spec:
       containers:
-      - name: nginx
-        image: bitnami/nginx:1.16.1-debian-9-r84
+      - name: server
+        image: mkmik/tlsdemo-server
         ports:
-        - containerPort: 8080
-        - containerPort: 8443
+        - containerPort: 50052

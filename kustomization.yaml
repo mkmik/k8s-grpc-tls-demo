@@ -1,7 +1,0 @@
-namespace: mkm-tls
-resources:
-  - cert.yaml
-  - deployment.yaml
-  - svc.yaml
-  - ingress.yaml
-  - debug.yaml
