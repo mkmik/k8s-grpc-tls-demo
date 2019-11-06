@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debug
+spec:
+  containers:
+  - name: debug
+    image: bitnami/minideb
+    command:
+    - /bin/bash
+    args:
+    - "-c"
+    - "sleep 100000"
+#  hostNetwork: true

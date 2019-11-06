@@ -2,6 +2,8 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: demo
+#  annotations:
+#    nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
 spec:
   rules:
   - host: demo-tls.k.dev.bitnami.net
@@ -9,4 +11,4 @@ spec:
       paths:
       - backend:
           serviceName: demo
-          servicePort: 443
+          servicePort: 80
