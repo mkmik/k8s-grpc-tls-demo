@@ -1,0 +1,12 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: demo
+spec:
+  rules:
+  - host: demo-tls.k.dev.bitnami.net
+    http:
+      paths:
+      - backend:
+          serviceName: demo
+          servicePort: 80
