@@ -53,7 +53,7 @@ exit 0
 ###
 
 if [ ! -f kustomization.yaml ]; then
-  kustomize create --resources ../base/
+  kustomize create --resources ../manifests/
 fi
 
 ###
