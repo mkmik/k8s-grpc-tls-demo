@@ -55,7 +55,7 @@ if [ ! -z "${do_build}" ]; then
     docker build .. --target=${i} -t ${image_prefix}-${i}
     docker push ${image_prefix}-${i}
     digest=$(docker inspect ${image_prefix}-${i} | jq -r '.[0].RepoDigests[0]')
-    kustomize edit set image ${image_prefix}-${i}=$digest
+    kustomize edit set image replaceme-${i}=$digest
   done
 fi
 

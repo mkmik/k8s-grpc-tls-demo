@@ -19,6 +19,6 @@ spec:
     spec:
       containers:
       - name: server
-        image: mkmik/tlsdemo-server
+        image: replaceme-server
         ports:
         - containerPort: 50052

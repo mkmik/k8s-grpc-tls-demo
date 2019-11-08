@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: client
-        image: mkmik/tlsdemo-client
+        image: replaceme-client
         args:
         - "-plaintext"
         - "-addr"
@@ -49,7 +49,7 @@ spec:
     spec:
       containers:
       - name: client
-        image: mkmik/tlsdemo-client
+        image: replaceme-client
         args:
         - "-plaintext"
         - "-addr"
@@ -80,7 +80,7 @@ spec:
     spec:
       containers:
       - name: client
-        image: mkmik/tlsdemo-client
+        image: replaceme-client
         args:
         - "-addr"
         - "demo-tls.k.dev.bitnami.net:443"
