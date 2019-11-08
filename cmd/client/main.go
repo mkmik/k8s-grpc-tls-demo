@@ -43,11 +43,13 @@ func run(plaintext bool, address, name string) error {
 		// Contact the server and print out its response.
 		ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 		defer cancel()
+
+		before := time.Now()
 		r, err := c.SayHello(ctx, &pb.HelloRequest{Name: name})
 		if err != nil {
 			log.Printf("could not greet: %v", err)
 		}
-		log.Printf("Greeting: %s", r.GetMessage())
+		log.Printf("Greeting: %s (took %v)", r.GetMessage(), time.Since(before))
 	}
 	return nil
 }
