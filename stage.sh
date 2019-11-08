@@ -42,14 +42,6 @@ if [ "${cnt}" == 0 -o -z "${image_prefix}" ]; then
   usage
 fi
 
-
-echo "IMAGE_PREFIX: ${image_prefix}"
-echo "BUILD: ${do_build}"
-echo "DIFF: ${do_diff}"
-echo "APPLY: ${do_apply}"
-echo "ARGS: $args"
-exit 0
-
 ###
 
 if [ ! -f kustomization.yaml ]; then
