@@ -1,82 +1,18 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: client-clusterip
+  name: client
   labels:
-    app: client-clusterip
-  annotations:
-    description: |
-      This client talks to the gRPC server via a (normal) clusterIP service.
-      The expected output is long runs of answers by the same server pod hostname.
+    app: client
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: client-clusterip
+      app: client
   template:
     metadata:
       labels:
-        app: client-clusterip
-    spec:
-      containers:
-      - name: client
-        image: replaceme-client
-        args:
-        - "-plaintext"
-        - "-addr"
-        - "demo-clusterip:50052"
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: client-headless
-  labels:
-    app: client-headless
-  annotations:
-    description: |
-      This client talks to the gRPC server via a headless service.
-      The expected output is a randomly balanced mix of server pod hostnames.
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: client-headless
-  template:
-    metadata:
-      labels:
-        app: client-headless
-    spec:
-      containers:
-      - name: client
-        image: replaceme-client
-        args:
-        - "-plaintext"
-        - "-addr"
-        - "demo-headless:50052"
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: client-ingress
-  labels:
-    app: client-ingress
-  annotations:
-    description: |
-      This client talks to the gRPC server via an ingress.
-      The expected output is a well balanced mix of server pod hostnames.
-      The NGINX ingress controller is aware of how many connections hit each backend
-      and can react accordingly. Furhermore when pods apper and disappear it can gracefully
-      ramp up and drain traffic.
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: client-ingress
-  template:
-    metadata:
-      labels:
-        app: client-ingress
+        app: client
     spec:
       containers:
       - name: client

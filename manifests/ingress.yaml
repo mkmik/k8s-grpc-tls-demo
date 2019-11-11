@@ -13,7 +13,7 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: demo-clusterip
+          serviceName: demo
           servicePort: 50052
   tls:
   - hosts:
