@@ -20,5 +20,17 @@ spec:
       containers:
       - name: server
         image: replaceme-server
+        args:
+        - "--cert"
+        - /certs/tls.crt
+        - "--key"
+        - /certs/tls.key
         ports:
         - containerPort: 50052
+        volumeMounts:
+        - name: secret-volume
+          mountPath: /certs
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: demo-cert

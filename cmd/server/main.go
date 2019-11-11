@@ -14,11 +14,14 @@ import (
 	pb "github.com/mkmik/k8s-grpc-tls-demo/pkg/helloworld"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/channelz/service"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/reflection"
 )
 
 var (
-	addr = flag.String("listen", ":50052", "Listening address")
+	addr     = flag.String("listen", ":50052", "Listening address")
+	certPath = flag.String("cert", "", "Path to TLS certificate")
+	keyPath  = flag.String("key", "", "Path to TLS key")
 )
 
 // server is used to implement helloworld.GreeterServer.
@@ -33,12 +36,22 @@ func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloRe
 	return &pb.HelloReply{Message: fmt.Sprintf("%q says: Hello %s", s.hostname, in.GetName())}, nil
 }
 
-func run(addr string) error {
+func run(addr, certPath, keyPath string) error {
 	lis, err := net.Listen("tcp", addr)
 	if err != nil {
 		return fmt.Errorf("failed to listen: %w", err)
 	}
-	s := grpc.NewServer()
+
+	var opts []grpc.ServerOption
+	if certPath != "" {
+		creds, err := credentials.NewServerTLSFromFile(certPath, keyPath)
+		if err != nil {
+			return err
+		}
+		opts = append(opts, grpc.Creds(creds))
+	}
+	s := grpc.NewServer(opts...)
+
 	reflection.Register(s)
 	service.RegisterChannelzServiceToServer(s)
 
@@ -55,7 +68,7 @@ func run(addr string) error {
 func main() {
 	flag.Parse()
 
-	if err := run(*addr); err != nil {
+	if err := run(*addr, *certPath, *keyPath); err != nil {
 		log.Fatal(err)
 	}
 }
