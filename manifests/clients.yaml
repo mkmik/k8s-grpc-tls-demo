@@ -53,7 +53,7 @@ spec:
         args:
         - "-plaintext"
         - "-addr"
-        - "demo-headless:50052"
+        - "dns:///demo-headless:50052"
 ---
 apiVersion: apps/v1
 kind: Deployment

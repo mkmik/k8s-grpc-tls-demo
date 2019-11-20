@@ -31,7 +31,7 @@ func run(plaintext bool, address, name string) error {
 	if plaintext {
 		transport = grpc.WithInsecure()
 	}
-	conn, err := grpc.Dial(address, grpc.WithBlock(), transport)
+	conn, err := grpc.Dial(address, grpc.WithBlock(), grpc.WithBalancerName("round_robin"), transport)
 	if err != nil {
 		return fmt.Errorf("did not connect: %w", err)
 	}
