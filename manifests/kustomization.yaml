@@ -4,5 +4,6 @@ kind: Kustomization
 resources:
 - deployment.yaml
 - clients.yaml
+- shell.yaml
 - svc.yaml
 - ingress.yaml
