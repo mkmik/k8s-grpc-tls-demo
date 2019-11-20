@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shell
+  labels:
+    app: shell
+  annotations:
+    description: |
+      A shell
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shell
+  template:
+    metadata:
+      labels:
+        app: shell
+    spec:
+      containers:
+      - name: shell
+        image: debian:10
+        command:
+        - /bin/bash
+        args:
+        - "-c"
+        - |
+          apt-get update
+          apt-get install -y dnsutils
+          while true; do sleep 100000; done
