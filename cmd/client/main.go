@@ -49,7 +49,7 @@ func run(plaintext bool, address, name string) error {
 		if err != nil {
 			log.Printf("could not greet: %v", err)
 		}
-		log.Printf("Greeting: %s (took %v)", r.GetMessage(), time.Since(before))
+		log.Printf("Greeting: %s (talking to %q took %v)", r.GetMessage(), address, time.Since(before))
 	}
 	return nil
 }
