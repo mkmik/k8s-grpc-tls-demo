@@ -58,6 +58,35 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: client-kuberesolver
+  labels:
+    app: client-kuberesolver
+  annotations:
+    description: |
+      This client talks to the gRPC server via custom kubernetes name resolver
+      (see https://github.com/sercand/kuberesolver).
+      It's not really working...
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: client-kuberesolver
+  template:
+    metadata:
+      labels:
+        app: client-kuberesolver
+    spec:
+      containers:
+      - name: client
+        image: replaceme-client
+        args:
+        - "-plaintext"
+        - "-addr"
+        - "kubernetes://mkm-tls/demo-clusterip:grpc"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
   name: client-ingress
   labels:
     app: client-ingress

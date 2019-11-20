@@ -11,6 +11,7 @@ import (
 	"time"
 
 	pb "github.com/mkmik/k8s-grpc-tls-demo/pkg/helloworld"
+	"github.com/sercand/kuberesolver"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )
@@ -25,6 +26,9 @@ const (
 )
 
 func run(plaintext bool, address, name string) error {
+	// Register kuberesolver to grpc
+	kuberesolver.RegisterInCluster()
+
 	// Set up a connection to the server.
 	config := &tls.Config{}
 	transport := grpc.WithTransportCredentials(credentials.NewTLS(config))
